@@ -25,7 +25,7 @@ code:
   minimum_size: 50
   minimum_margin:
     percent: 8
-  theme_name: base16-eighties.dark
+  theme_name: gruvbox-dark
   padding:
     horizontal: 2
     vertical: 1
