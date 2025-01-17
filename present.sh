@@ -11,6 +11,8 @@ if ! command -v presenterm &>/dev/null; then
   exit 1
 fi
 
+git submodule update --init --recursive
+
 [ -z "$PRESENT_MODE" ] && args="" || args="-p"
 wezterm --config-file config/wezterm.lua \
   start presenterm \

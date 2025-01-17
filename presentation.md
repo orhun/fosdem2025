@@ -46,7 +46,7 @@ A Rust library that's all about cooking up terminal user interfaces (TUIs) 👨�
 
 <!-- column: 1 -->
 
-```rust
+```rust {1-20|5|6|7,16-18|8-11|12-14|1-20}
 use ratatui::crossterm::event::{self, Event};
 use ratatui::{text::Text, Frame};
 
@@ -90,6 +90,69 @@ fn draw(frame: &mut Frame) {
 - Table
 - Tabs
 
+![](./assets/rat-spin.gif)
+
 <!-- column: 1 -->
 
-## k
+## Concepts
+
+- Rendering
+  - **Buffer** ✨
+- Layout
+- Application patterns
+- Backends
+- Event handling
+
+`https://ratatui.rs/concepts`
+
+# Demo
+
+```bash +exec +acquire_terminal
+cargo run --manifest-path ratatui/examples/apps/demo2/Cargo.toml
+```
+
+<!-- end_slide -->
+
+# "The TUI Look"
+
+<!-- column_layout: [2, 1] -->
+
+<!-- column: 0 -->
+
+```bash +exec +acquire_terminal
+tv
+```
+
+`https://github.com/alexpasmantier/television`
+
+```bash +exec +acquire_terminal
+tracker
+```
+
+`https://github.com/ShenMian/tracker`
+
+<!-- end_slide -->
+
+![image:width:75%](./assets/rusty-tape.gif)
+
+<!-- column_layout: [1, 2] -->
+
+<!-- column: 1 -->
+
+🖥️ Pane-based layout  
+🗂️ Pop-up menus  
+🎨 Highlight colors
+
+<!-- end_slide -->
+
+<!-- column_layout: [2, 1] -->
+
+<!-- column: 0 -->
+
+**Minitel**: Rust stack for the French videotex terminal system from the 1980s.
+
+`https://github.com/plule/minitel`
+
+```bash +exec
+mpv --quiet --loop-file assets/minitel-ratatui.mp4
+```
