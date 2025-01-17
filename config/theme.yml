@@ -10,7 +10,7 @@ default:
 footer:
   style: template
   left: "@orhundev"
-  right: "{current_slide}"
+  right: ""
 
 slide_title:
   alignment: center
