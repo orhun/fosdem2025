@@ -1,0 +1,15 @@
+[package]
+name = "fosdem2025-code"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ratatui = { path = "../ratatui/ratatui" }
+
+[[bin]]
+name = "minimal"
+path = "src/minimal.rs"
+
+[[bin]]
+name = "styling"
+path = "src/styling.rs"
