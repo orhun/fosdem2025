@@ -1,3 +1,7 @@
 [submodule "ratatui"]
 	path = ratatui
 	url = https://github.com/ratatui/ratatui
+
+[submodule "tachyonfx"]
+	path = tachyonfx
+	url = https://github.com/junkdog/tachyonfx

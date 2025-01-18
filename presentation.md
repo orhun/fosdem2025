@@ -32,6 +32,22 @@ theme:
 
 <!-- end_slide -->
 
+<!-- column_layout: [1, 1] -->
+
+<!-- column: 0 -->
+
+<!-- jump_to_middle -->
+
+Chapter 1: **Web to Terminal** 💻
+
+<!-- column: 1 -->
+
+<!-- new_lines: 6 -->
+
+![image:width:50%](assets/ratatui-hat.gif)
+
+<!-- end_slide -->
+
 <!-- column_layout: [3, 6] -->
 
 <!-- column: 0 -->
@@ -115,6 +131,8 @@ cargo run --manifest-path ratatui/examples/apps/demo2/Cargo.toml
 
 # "The TUI Look"
 
+<!-- pause -->
+
 <!-- column_layout: [2, 1] -->
 
 <!-- column: 0 -->
@@ -124,6 +142,8 @@ tv
 ```
 
 `https://github.com/alexpasmantier/television`
+
+<!-- pause -->
 
 ```bash +exec +acquire_terminal
 tracker
@@ -156,3 +176,98 @@ tracker
 ```bash +exec
 mpv --quiet --loop-file assets/minitel-ratatui.mp4
 ```
+
+<!-- end_slide -->
+
+```rust
+Text::raw("Hello World!");
+```
+
+<!-- pause -->
+
+```rust
+Paragraph::new("Hello World!").wrap(Wrap { trim: true });
+```
+
+<!-- pause -->
+
+```rust
+let text = Paragraph::new("Hello World!")
+    .wrap(Wrap { trim: true })
+    .centered()
+    .block(
+        Block::bordered()
+            .border_type(BorderType::Rounded)
+            .title_top(Line::from("Title").centered())
+            .title_bottom(Line::from("!").right_aligned()),
+    );
+```
+
+<!-- end_slide -->
+
+```rust
+let block = Block::bordered()
+    .style(Style::default().bg(Color::Black).fg(Color::White))
+    .border_type(BorderType::Rounded)
+    .title(Line::from(" ✨ Title ✨ ".black().on_blue().bold()).centered())
+    .title_bottom(Line::from(" ⚡ Bottom ⚡ ".black().on_green().italic()).right_aligned());
+
+let text = Paragraph::new("Hello, World!".red())
+    .wrap(Wrap { trim: true })
+    .centered()
+    .block(block);
+```
+
+```bash +exec +acquire_terminal
+cargo run --manifest-path code/Cargo.toml --bin styling
+```
+
+<!-- end_slide -->
+
+```bash +exec +acquire_terminal
+exabind
+```
+
+<!-- pause -->
+
+# TachyonFX
+
+Shader-like effects library for Ratatui applications
+
+`https://github.com/junkdog/tachyonfx`
+
+<!-- pause -->
+
+```bash +exec +acquire_terminal
+cargo run --manifest-path tachyonfx/Cargo.toml --example fx-chart
+```
+
+<!-- end_slide -->
+
+# Tek
+
+A music making program for 24-bit unicode terminals.
+
+`https://codeberg.org/unspeaker/tek`
+
+```bash +exec +acquire_terminal
+tek_sequencer
+```
+
+<!-- end_slide -->
+
+<!-- column_layout: [1, 1] -->
+
+<!-- column: 0 -->
+
+<!-- jump_to_middle -->
+
+Chapter 2: **Terminal to Web** 💻
+
+<!-- column: 1 -->
+
+<!-- new_lines: 5 -->
+
+![image:width:70%](assets/ratatui-spin.gif)
+
+<!-- end_slide -->
