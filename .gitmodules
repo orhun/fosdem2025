@@ -5,3 +5,6 @@
 [submodule "tachyonfx"]
 	path = tachyonfx
 	url = https://github.com/junkdog/tachyonfx
+[submodule "egui_ratatui"]
+	path = egui_ratatui
+	url = https://github.com/gold-silver-copper/egui_ratatui

@@ -169,7 +169,9 @@ tracker
 
 <!-- column: 0 -->
 
-**Minitel**: Rust stack for the French videotex terminal system from the 1980s.
+## Minitel
+
+Rust stack for the French videotex terminal system from the 1980s.
 
 `https://github.com/plule/minitel`
 
@@ -236,6 +238,8 @@ Shader-like effects library for Ratatui applications
 
 `https://github.com/junkdog/tachyonfx`
 
+`https://github.com/junkdog/exabind`
+
 <!-- pause -->
 
 ```bash +exec +acquire_terminal
@@ -244,7 +248,52 @@ cargo run --manifest-path tachyonfx/Cargo.toml --example fx-chart
 
 <!-- end_slide -->
 
-# Tek
+```rust
+Text::raw("Hello World!");
+```
+
+<!-- pause -->
+
+```rust
+pub struct Buffer {
+    pub area: Rect,
+    pub content: Vec<Cell>,
+}
+```
+
+![](assets/rat-buffer.gif)
+
+<!-- end_slide -->
+
+```
+    0   1   2   3   4   5   6   7   8   9  10  11
+  ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+0 │ H │ e │ l │ l │ o │   │ W │ o │ r │ l │ d │ ! │
+  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+1 │   │   │   │   │ ▲ │   │   │   │   │   │   │   │
+  ├───┼───┼───┼───┼─│─┼───┼───┼───┼───┼───┼───┼───┤
+2 │   │   │   │   │ │ │   │   │   │   │   │   │   │
+  ├───┼───┼───┼───┼─│─┼───┼───┼───┼───┼───┼───┼───┤
+3 │   │   │ ┌─────┴─────┐ │   │   │   │   │   │   │
+  └───┴───┴─│ ┴───┴───┴ │ ┴───┴───┴───┴───┴───┴───┘
+            │           │
+      ┌─────┴─────┐  ┌──┴──┐
+      │  symbol   │  │style│
+      │   “o”     │  │Reset│
+      └───────────┘  └─────┘
+```
+
+<!-- reset_layout -->
+
+<!-- column_layout: [1, 7] -->
+
+<!-- column: 1 -->
+
+`https://ratatui.rs/concepts/rendering/under-the-hood/`
+
+<!-- end_slide -->
+
+### Tek
 
 A music making program for 24-bit unicode terminals.
 
@@ -254,6 +303,8 @@ A music making program for 24-bit unicode terminals.
 tek_sequencer
 ```
 
+![](assets/rat-dance.gif)
+
 <!-- end_slide -->
 
 <!-- column_layout: [1, 1] -->
@@ -262,12 +313,143 @@ tek_sequencer
 
 <!-- jump_to_middle -->
 
-Chapter 2: **Terminal to Web** 💻
+Chapter 2: **Terminal to Web** 🌐
 
 <!-- column: 1 -->
 
 <!-- new_lines: 5 -->
 
-![image:width:70%](assets/ratatui-spin.gif)
+![image:width:70%](assets/absolute-cinema.gif)
 
 <!-- end_slide -->
+
+# Xterm.js
+
+```html {1-14|11}
+<html>
+  <head>
+    <link rel="stylesheet" href="node_modules/@xterm/xterm/css/xterm.css" />
+    <script src="node_modules/@xterm/xterm/lib/xterm.js"></script>
+  </head>
+  <body>
+    <div id="terminal"></div>
+    <script>
+      var term = new Terminal();
+      term.open(document.getElementById("terminal"));
+      term.write("Hello from \x1B[1;3;31mxterm.js\x1B[0m");
+    </script>
+  </body>
+</html>
+```
+
+<!-- end_slide -->
+
+## Ratatui's Backend
+
+```rust {1-16|2-3}
+pub trait Backend {
+    fn draw<'a, I>(&mut self, content: I) -> Result<()>
+       where I: Iterator<Item = (u16, u16, &'a Cell)>;
+    fn hide_cursor(&mut self) -> Result<()>;
+    fn show_cursor(&mut self) -> Result<()>;
+    fn get_cursor_position(&mut self) -> Result<Position>;
+    fn set_cursor_position<P: Into<Position>>(
+        &mut self,
+        position: P,
+    ) -> Result<()>;
+    fn clear(&mut self) -> Result<()>;
+    fn size(&self) -> Result<Size>;
+    fn window_size(&mut self) -> Result<WindowSize>;
+    fn flush(&mut self) -> Result<()>;
+    // ...
+}
+```
+
+<!-- end_slide -->
+
+```rust
+pub struct Cell {
+    pub fg: Color,
+    pub bg: Color,
+    pub underline_color: Color,
+    pub modifier: Modifier,
+    pub skip: bool,
+}
+```
+
+```rust {1-9|4}
+impl Backend for TestBackend {
+    fn draw<'a, I>(&mut self, content: I) -> io::Result<()>
+    where
+        I: Iterator<Item = (u16, u16, &'a Cell)>,
+    {
+        for (x, y, c) in content {
+            self.buffer[(x, y)] = c.clone();
+        }
+        Ok(())
+    }
+}
+```
+
+<!-- end_slide -->
+
+# egui_ratatui
+
+A ratatui backend that is also an egui widget.
+
+`https://github.com/gold-silver-copper/egui_ratatui`
+
+Demo: https://gold-silver-copper.github.io/
+
+```bash +exec
+cargo run --manifest-path egui_ratatui/bevy_example/Cargo.toml
+```
+
+<!-- end_slide -->
+
+```rust
+App::new()
+    .add_plugins(DefaultPlugins)
+    .init_resource::<BevyTerminal<RataguiBackend>>()
+```
+
+```rust
+impl Backend for RataguiBackend { ... }
+```
+
+```rust
+impl egui::Widget for &mut RataguiBackend { ... }
+```
+
+![](assets/rat-cup.gif)
+
+<!-- end_slide -->
+
+# Webatui
+
+`https://github.com/TylerBloom/webatui`
+
+<!-- end_slide -->
+
+![image:width:30%](assets/rat-work.gif)
+
+<!-- column_layout: [1, 4] -->
+
+<!-- column: 1 -->
+
+We want:
+
+1. No Javascript, only Rust
+2. Only depend on Ratatui
+3. Easy to set up
+4. Easy to convert existing apps
+
+_"Write Rust once, run everywhere."_
+
+<!-- end_slide -->
+
+![](assets/rat-cook.gif)
+
+<!-- end_slide -->
+
+![image:width:40%](assets/render-diagram.png)
