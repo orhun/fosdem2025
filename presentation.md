@@ -425,9 +425,50 @@ impl egui::Widget for &mut RataguiBackend { ... }
 
 <!-- end_slide -->
 
-# Webatui
+# webatui
+
+An integration between the Yew framework and Ratatui  
+for making TUI-themed WASM webapps
 
 `https://github.com/TylerBloom/webatui`
+
+Demo: https://avid-rustacean.shuttleapp.rs/
+
+```bash +exec
+pkill trunk
+cd webatui/examples/counter
+trunk serve
+```
+
+<!-- end_slide -->
+
+1. Create a struct that will hold your app's logic
+2. Implement the `TerminalApp` trait for it
+3. Run the `run_tui` function with an instance of your app.
+
+```rust
+struct MyApp { title: String }
+
+impl TerminalApp for MyApp {
+    type Message = ();
+    fn update(
+      &mut self, _: TermContext<'_, Self>,
+      _: Self::Message) -> bool { false }
+
+    fn render(&self, area: Rect, frame: &mut Frame<'_>) {
+        let para = Paragraph::new(self.title.as_str());
+        frame.render_widget(para, area);
+    }
+}
+
+run_tui(MyApp { title: "Hello WWW!".into() })
+```
+
+<!-- end_slide -->
+
+![image:width:90%](assets/render-diagram-1.png)
+
+![image:width:20%](assets/rat-hydration.gif)
 
 <!-- end_slide -->
 
@@ -448,8 +489,10 @@ _"Write Rust once, run everywhere."_
 
 <!-- end_slide -->
 
+<!-- new_lines: 3 -->
+
 ![](assets/rat-cook.gif)
 
 <!-- end_slide -->
 
-![image:width:40%](assets/render-diagram.png)
+![image:width:40%](assets/render-diagram-2.png)

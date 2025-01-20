@@ -8,3 +8,6 @@
 [submodule "egui_ratatui"]
 	path = egui_ratatui
 	url = https://github.com/gold-silver-copper/egui_ratatui
+[submodule "webatui"]
+	path = webatui
+	url = https://github.com/TylerBloom/webatui
