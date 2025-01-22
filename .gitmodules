@@ -11,3 +11,6 @@
 [submodule "webatui"]
 	path = webatui
 	url = https://github.com/TylerBloom/webatui
+[submodule "ratzilla"]
+	path = ratzilla
+	url = https://github.com/orhun/ratzilla

@@ -435,9 +435,8 @@ for making TUI-themed WASM webapps
 Demo: https://avid-rustacean.shuttleapp.rs/
 
 ```bash +exec
-pkill trunk
 cd webatui/examples/counter
-trunk serve
+pkill trunk && trunk serve
 ```
 
 <!-- end_slide -->
@@ -625,3 +624,81 @@ fn main() -> std::io::Result<()> {
 <!-- end_slide -->
 
 # Ratzilla
+
+Build terminal-themed web applications with Rust and WebAssembly.
+
+`https://github.com/orhun/ratzilla`
+
+```bash +exec
+cd ratzilla/examples/demo
+pkill trunk && trunk serve
+```
+
+<!-- reset_layout -->
+
+![](./assets/rat-omg.gif)
+
+<!-- end_slide -->
+
+_Also announcing..._
+
+<!-- pause -->
+
+### Terminal Collective 🖥️
+
+https://terminalcollective.org
+
+A community for open-source terminal software enthusiasts.
+
+`https://github.com/terminalcollective`
+
+![](./assets/rat-ski.gif)
+
+<!-- end_slide -->
+
+#### Extra: Going full circle
+
+<!-- pause -->
+
+- [brow.sh](https://www.brow.sh)
+- [carbonyl](https://github.com/fathyb/carbonyl)
+
+<!-- jump_to_middle -->
+
+![image:width:20%](./assets/rat-clown.gif)
+
+<!-- end_slide -->
+
+_On a personal note:_
+
+<!-- pause -->
+
+![image:width:85%](./assets/ratatui-talk-2024.png)
+
+<!-- pause -->
+
+<!-- column_layout: [4, 3] -->
+
+<!-- column: 1 -->
+
+_https://grindhouse.dev_
+
+<!-- end_slide -->
+
+<!-- column_layout: [1, 5] -->
+
+<!-- column: 1 -->
+
+### Thank you! <3
+
+<!-- reset_layout -->
+
+![](./assets/rat-sleep.gif)
+
+<!-- column_layout: [1, 5] -->
+
+<!-- column: 1 -->
+
+- https://github.com/orhun
+- https://github.com/orhun/ratzilla
+- https://github.com/terminalcollective
