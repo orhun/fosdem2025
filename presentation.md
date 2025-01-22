@@ -495,4 +495,133 @@ _"Write Rust once, run everywhere."_
 
 <!-- end_slide -->
 
-![image:width:40%](assets/render-diagram-2.png)
+<!-- column_layout: [1, 1] -->
+
+<!-- column: 0 -->
+
+![](assets/render-diagram-2.png)
+
+<!-- pause -->
+
+<!-- column: 1 -->
+
+## web-sys
+
+> https://rustwasm.github.io
+
+_"Like **libc**, but for the Web"_
+
+<!-- pause -->
+
+## trunk
+
+> https://trunkrs.dev
+
+_"WASM application bundler for Rust"_
+
+• Works with standard `main()` function
+
+• Bundle WASM, JS snippets, images, css, scss etc.
+
+• Uses a source HTML file
+
+<!-- end_slide -->
+
+### Rendering
+
+<!-- pause -->
+
+```rust
+let f = Rc::new(RefCell::new(None));
+let g = f.clone();
+let mut i = 0;
+*g.borrow_mut() = Some(Closure::new(move || {
+    // Set the body's text content to how many times this
+    // requestAnimationFrame callback has fired.
+    i += 1;
+    let text = format!("RAF has been called {i} times.");
+    body().set_text_content(Some(&text));
+    // Schedule for another requestAnimationFrame callback.
+    request_animation_frame(f.borrow().as_ref().unwrap());
+}));
+
+request_animation_frame(g.borrow().as_ref().unwrap());
+```
+
+> https://rustwasm.github.io/wasm-bindgen/examples/request-animation-frame
+
+<!-- end_slide -->
+
+### Backend
+
+<!-- pause -->
+
+#### DOM
+
+```html
+<div id="grid">
+  <pre style="margin: 0px;">
+    <span style="color: rgb(100, 100, 100);">█</span>
+    <span style="color: rgb(100, 100, 100);">█</span>
+  </pre>
+</div>
+```
+
+<!-- pause -->
+
+#### Canvas
+
+```rust
+let element = window().document().create_element("canvas");
+let canvas = element.dyn_into::<web_sys::HtmlCanvasElement>();
+// <canvas width="1400" height="1000"></canvas>
+```
+
+<!-- end_slide -->
+
+### Events
+
+```rust
+let closure = Closure::<dyn FnMut(_)>::new(move |event: web_sys::KeyboardEvent| {
+  // Handle the event
+});
+
+window().document()
+    .add_event_listener_with_callback(
+      "keydown", closure.as_ref().unchecked_ref()
+    )
+```
+
+![](./assets/rat-spin2.gif)
+
+<!-- end_slide -->
+
+```rust
+fn main() -> std::io::Result<()> {
+    let backend = DomBackend::new()?;
+    let terminal = Terminal::new(backend)?;
+
+    terminal.on_key_event(move |event| match event.code {
+        KeyCode::Char(c) => {
+            // Handle the key event
+        }
+        _ => {}
+    });
+
+    terminal.render_on_web(move |f| {
+        // Draw the UI
+    });
+
+    Ok(())
+}
+```
+
+<!-- column_layout: [2, 1] -->
+
+<!-- column: 1 -->
+
+🥁 _Introducing..._
+
+<!-- end_slide -->
+
+# Ratzilla
