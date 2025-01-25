@@ -16,6 +16,8 @@ theme:
 
 <!-- column: 1 -->
 
+<!-- pause -->
+
 ## _Orhun Parmaksız_
 
 ✨ Open source, Rust and terminals!
@@ -48,19 +50,68 @@ Chapter 1: **Web to Terminal** 💻
 
 <!-- end_slide -->
 
+# Ratatui
+
 <!-- column_layout: [3, 6] -->
 
 <!-- column: 0 -->
 
-# Ratatui
+<!-- new_lines: 1 -->
 
-![image:width:70%](assets/ratatui-spin.gif)
+![image:width:90%](assets/ratatui-spin.gif)
+
+<!-- pause -->
+
+<!-- column: 1 -->
+
+<!-- new_lines: 2 -->
 
 A Rust library that's all about cooking up terminal user interfaces (TUIs) 👨‍🍳🐀
 
 `https://github.com/ratatui`
 
+```bash +exec +acquire_terminal
+cargo run --manifest-path ratatui/examples/apps/demo2/Cargo.toml
+```
+
+<!-- end_slide -->
+
+<!-- column_layout: [1, 1] -->
+
+<!-- column: 0 -->
+
+## Widgets
+
+- Block
+- BarChart
+- Calendar
+- Canvas
+- Chart
+- Gauge
+- LineGauge
+- List
+- Paragraph
+- Scrollbar
+- Sparkline
+- Table
+- Tabs
+
 <!-- column: 1 -->
+
+## Concepts
+
+- Rendering
+  - **Buffer** ✨
+- Layout
+- Application patterns
+- Backends
+- Event handling
+
+`https://ratatui.rs/concepts`
+
+![image:width:50%](assets/rat-point.gif)
+
+<!-- end_slide -->
 
 ```rust {1-20|5|6|7,16-18|8-11|12-14|1-20}
 use ratatui::crossterm::event::{self, Event};
@@ -86,54 +137,11 @@ fn draw(frame: &mut Frame) {
 
 <!-- end_slide -->
 
-<!-- column_layout: [1, 1] -->
-
-<!-- column: 0 -->
-
-## Widgets
-
-- Block
-- BarChart
-- Calendar
-- Canvas
-- Chart
-- Gauge
-- LineGauge
-- List
-- Paragraph
-- Scrollbar
-- Sparkline
-- Table
-- Tabs
-
-![](./assets/rat-spin.gif)
-
-<!-- column: 1 -->
-
-## Concepts
-
-- Rendering
-  - **Buffer** ✨
-- Layout
-- Application patterns
-- Backends
-- Event handling
-
-`https://ratatui.rs/concepts`
-
-# Demo
-
-```bash +exec +acquire_terminal
-cargo run --manifest-path ratatui/examples/apps/demo2/Cargo.toml
-```
-
-<!-- end_slide -->
-
 # "The TUI Look"
 
 <!-- pause -->
 
-<!-- column_layout: [2, 1] -->
+<!-- column_layout: [3, 2] -->
 
 <!-- column: 0 -->
 
@@ -143,13 +151,27 @@ tv
 
 `https://github.com/alexpasmantier/television`
 
+<!-- column: 1 -->
+
+General purpose fuzzy finder
+
 <!-- pause -->
+
+<!-- reset_layout -->
+
+<!-- column_layout: [3, 2] -->
+
+<!-- column: 0 -->
 
 ```bash +exec +acquire_terminal
 tracker
 ```
 
 `https://github.com/ShenMian/tracker`
+
+<!-- column: 1 -->
+
+Real-time satellite tracking and orbit prediction
 
 <!-- end_slide -->
 
@@ -220,6 +242,8 @@ let text = Paragraph::new("Hello, World!".red())
     .block(block);
 ```
 
+<!-- pause -->
+
 ```bash +exec +acquire_terminal
 cargo run --manifest-path code/Cargo.toml --bin styling
 ```
@@ -248,11 +272,9 @@ cargo run --manifest-path tachyonfx/Cargo.toml --example fx-chart
 
 <!-- end_slide -->
 
-```rust
-Text::raw("Hello World!");
-```
+<!-- column_layout: [1, 1] -->
 
-<!-- pause -->
+<!-- column: 0 -->
 
 ```rust
 pub struct Buffer {
@@ -260,6 +282,41 @@ pub struct Buffer {
     pub content: Vec<Cell>,
 }
 ```
+
+<!-- column: 1 -->
+
+<!-- pause -->
+
+```rust
+pub struct Rect {
+    pub x: u16,
+    pub y: u16,
+    pub width: u16,
+    pub height: u16,
+}
+```
+
+<!-- pause -->
+
+<!-- reset_layout -->
+
+<!-- column_layout: [1, 1] -->
+
+<!-- column: 1 -->
+
+```rust
+pub struct Cell {
+    pub fg: Color,
+    pub bg: Color,
+    pub underline_color: Color,
+    pub modifier: Modifier,
+    pub skip: bool,
+}
+```
+
+<!-- pause -->
+
+<!-- column: 0 -->
 
 ![](assets/rat-buffer.gif)
 
@@ -367,16 +424,6 @@ pub trait Backend {
 
 <!-- end_slide -->
 
-```rust
-pub struct Cell {
-    pub fg: Color,
-    pub bg: Color,
-    pub underline_color: Color,
-    pub modifier: Modifier,
-    pub skip: bool,
-}
-```
-
 ```rust {1-9|4}
 impl Backend for TestBackend {
     fn draw<'a, I>(&mut self, content: I) -> io::Result<()>
@@ -391,6 +438,8 @@ impl Backend for TestBackend {
 }
 ```
 
+![](assets/rat-cowboy.gif)
+
 <!-- end_slide -->
 
 # egui_ratatui
@@ -400,6 +449,8 @@ A ratatui backend that is also an egui widget.
 `https://github.com/gold-silver-copper/egui_ratatui`
 
 Demo: https://gold-silver-copper.github.io/
+
+<!-- pause -->
 
 ```bash +exec
 cargo run --manifest-path egui_ratatui/bevy_example/Cargo.toml
@@ -413,9 +464,13 @@ App::new()
     .init_resource::<BevyTerminal<RataguiBackend>>()
 ```
 
+<!-- pause -->
+
 ```rust
 impl Backend for RataguiBackend { ... }
 ```
+
+<!-- pause -->
 
 ```rust
 impl egui::Widget for &mut RataguiBackend { ... }
@@ -434,6 +489,8 @@ for making TUI-themed WASM webapps
 
 Demo: https://avid-rustacean.shuttleapp.rs/
 
+<!-- pause -->
+
 ```bash +exec
 cd webatui/examples/counter
 pkill trunk && trunk serve
@@ -444,6 +501,8 @@ pkill trunk && trunk serve
 1. Create a struct that will hold your app's logic
 2. Implement the `TerminalApp` trait for it
 3. Run the `run_tui` function with an instance of your app.
+
+<!-- pause -->
 
 ```rust
 struct MyApp { title: String }
@@ -476,6 +535,8 @@ run_tui(MyApp { title: "Hello WWW!".into() })
 <!-- column_layout: [1, 4] -->
 
 <!-- column: 1 -->
+
+<!-- pause -->
 
 We want:
 
@@ -591,7 +652,7 @@ window().document()
     )
 ```
 
-![](./assets/rat-spin2.gif)
+![](./assets/rat-spin.gif)
 
 <!-- end_slide -->
 
@@ -625,9 +686,13 @@ fn main() -> std::io::Result<()> {
 
 # Ratzilla
 
+<!-- pause -->
+
 Build terminal-themed web applications with Rust and WebAssembly.
 
 `https://github.com/orhun/ratzilla`
+
+<!-- pause -->
 
 ```bash +exec
 cd ratzilla/examples/demo
@@ -660,8 +725,10 @@ A community for open-source terminal software enthusiasts.
 
 <!-- pause -->
 
+- [cuervo](https://github.com/mcclure/cuervo)
 - [brow.sh](https://www.brow.sh)
 - [carbonyl](https://github.com/fathyb/carbonyl)
+-
 
 <!-- jump_to_middle -->
 
@@ -681,7 +748,7 @@ _On a personal note:_
 
 <!-- column: 1 -->
 
-_https://grindhouse.dev_
+For motivation visit _https://grindhouse.dev_
 
 <!-- end_slide -->
 
