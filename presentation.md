@@ -769,3 +769,5 @@ For motivation visit _https://grindhouse.dev_
 - https://github.com/orhun
 - https://github.com/orhun/ratzilla
 - https://github.com/terminalcollective
+
+✨ Slides: _https://github.com/orhun/fosdem2025_
