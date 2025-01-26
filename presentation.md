@@ -668,7 +668,7 @@ fn main() -> std::io::Result<()> {
         _ => {}
     });
 
-    terminal.render_on_web(move |f| {
+    terminal.draw_web(move |f| {
         // Draw the UI
     });
 
