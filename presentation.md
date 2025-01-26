@@ -175,7 +175,7 @@ Real-time satellite tracking and orbit prediction
 
 <!-- end_slide -->
 
-![image:width:75%](./assets/rusty-tape.gif)
+![image:width:65%](./assets/systemctl-tui.png)
 
 <!-- column_layout: [1, 2] -->
 
