@@ -285,16 +285,7 @@ pub struct Buffer {
 
 <!-- column: 1 -->
 
-<!-- pause -->
-
-```rust
-pub struct Rect {
-    pub x: u16,
-    pub y: u16,
-    pub width: u16,
-    pub height: u16,
-}
-```
+![](assets/rat-buffer.gif)
 
 <!-- pause -->
 
@@ -305,6 +296,19 @@ pub struct Rect {
 <!-- column: 1 -->
 
 ```rust
+pub struct Rect {
+    pub x: u16,
+    pub y: u16,
+    pub width: u16,
+    pub height: u16,
+}
+```
+
+<!-- column: 0 -->
+
+<!-- pause -->
+
+```rust
 pub struct Cell {
     pub fg: Color,
     pub bg: Color,
@@ -313,12 +317,6 @@ pub struct Cell {
     pub skip: bool,
 }
 ```
-
-<!-- pause -->
-
-<!-- column: 0 -->
-
-![](assets/rat-buffer.gif)
 
 <!-- end_slide -->
 
