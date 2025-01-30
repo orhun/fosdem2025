@@ -98,13 +98,15 @@ cargo run --manifest-path ratatui/examples/apps/demo2/Cargo.toml
 
 <!-- column: 1 -->
 
+<!-- pause -->
+
 ## Concepts
 
 - Rendering
   - **Buffer** ✨
 - Layout
 - Application patterns
-- Backends
+- **Backends** ✨
 - Event handling
 
 `https://ratatui.rs/concepts`
@@ -264,8 +266,6 @@ Shader-like effects library for Ratatui applications
 
 `https://github.com/junkdog/exabind`
 
-<!-- pause -->
-
 ```bash +exec +acquire_terminal
 cargo run --manifest-path tachyonfx/Cargo.toml --example fx-chart
 ```
@@ -362,6 +362,20 @@ tek_sequencer
 
 <!-- end_slide -->
 
+## Conclusion
+
+<!-- pause -->
+
+✨ A E T H E S T I C S
+
+✅ Modern look and feel for terminal applications
+
+🤔 Question: Is this the future?
+
+![image:width:30%](assets/rat-cry.gif)
+
+<!-- end_slide -->
+
 <!-- column_layout: [1, 1] -->
 
 <!-- column: 0 -->
@@ -422,7 +436,7 @@ pub trait Backend {
 
 <!-- end_slide -->
 
-```rust {1-9|4}
+```rust {1-9|4,6-8}
 impl Backend for TestBackend {
     fn draw<'a, I>(&mut self, content: I) -> io::Result<()>
     where
@@ -490,8 +504,9 @@ Demo: https://avid-rustacean.shuttleapp.rs/
 <!-- pause -->
 
 ```bash +exec
+pkill trunk
 cd webatui/examples/counter
-pkill trunk && trunk serve
+trunk serve
 ```
 
 <!-- end_slide -->
@@ -525,6 +540,28 @@ run_tui(MyApp { title: "Hello WWW!".into() })
 ![image:width:90%](assets/render-diagram-1.png)
 
 ![image:width:20%](assets/rat-hydration.gif)
+
+<!-- end_slide -->
+
+```rust
+let button_style = Style::new()
+    .fg(Base16Accent::Accent01.to_color())
+    .to_hydrate();
+```
+
+<!-- pause -->
+
+```rust
+impl TerminalApp for Counter {
+  fn hydrate(&self, ctx: &Context<WebTerminal<Self>>, span: &mut DehydratedSpan) {
+      match span.text() {
+          "+1" => span.on_click(ctx.link().callback(|_| CounterMsg::Inc)),
+          "-1" => span.on_click(ctx.link().callback(|_| CounterMsg::Dec)),
+          _ => {}
+      }
+  }
+}
+```
 
 <!-- end_slide -->
 
@@ -567,7 +604,7 @@ _"Write Rust once, run everywhere."_
 
 > https://rustwasm.github.io
 
-_"Like **libc**, but for the Web"_
+_"Like **libc**, but for the web"_
 
 <!-- pause -->
 
@@ -639,18 +676,20 @@ let canvas = element.dyn_into::<web_sys::HtmlCanvasElement>();
 
 ### Events
 
+<!-- pause -->
+
 ```rust
 let closure = Closure::<dyn FnMut(_)>::new(move |event: web_sys::KeyboardEvent| {
   // Handle the event
 });
 
 window().document()
-    .add_event_listener_with_callback(
-      "keydown", closure.as_ref().unchecked_ref()
-    )
+  .add_event_listener_with_callback(
+    "keydown", closure.as_ref().unchecked_ref()
+  );
 ```
 
-![](./assets/rat-spin.gif)
+![](./assets/rat-writing.gif)
 
 <!-- end_slide -->
 
@@ -666,7 +705,7 @@ fn main() -> std::io::Result<()> {
         _ => {}
     });
 
-    terminal.draw_web(move |f| {
+    terminal.draw_web(move |frame| {
         // Draw the UI
     });
 
@@ -693,8 +732,9 @@ Build terminal-themed web applications with Rust and WebAssembly.
 <!-- pause -->
 
 ```bash +exec
+pkill trunk
 cd ratzilla/examples/demo
-pkill trunk && trunk serve
+trunk serve
 ```
 
 <!-- reset_layout -->
@@ -754,7 +794,7 @@ For motivation visit _https://grindhouse.dev_
 
 <!-- column: 1 -->
 
-### Thank you! <3
+### Thank you!
 
 <!-- reset_layout -->
 
@@ -769,3 +809,11 @@ For motivation visit _https://grindhouse.dev_
 - https://github.com/terminalcollective
 
 ✨ Slides: _https://github.com/orhun/fosdem2025_
+
+<!-- reset_layout -->
+
+<!-- column_layout: [2, 5] -->
+
+<!-- column: 1 -->
+
+_P.S. I don't have a rat under my hat_
