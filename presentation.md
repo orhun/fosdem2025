@@ -310,6 +310,7 @@ pub struct Rect {
 
 ```rust
 pub struct Cell {
+    symbol: CompactString,
     pub fg: Color,
     pub bg: Color,
     pub underline_color: Color,
@@ -349,6 +350,8 @@ pub struct Cell {
 <!-- end_slide -->
 
 ### Tek
+
+<!-- pause -->
 
 A music making program for 24-bit unicode terminals.
 
@@ -456,6 +459,8 @@ impl Backend for TestBackend {
 
 # egui_ratatui
 
+<!-- pause -->
+
 A ratatui backend that is also an egui widget.
 
 `https://github.com/gold-silver-copper/egui_ratatui`
@@ -494,6 +499,8 @@ impl egui::Widget for &mut RataguiBackend { ... }
 
 # webatui
 
+<!-- pause -->
+
 An integration between the Yew framework and Ratatui  
 for making TUI-themed WASM webapps
 
@@ -501,7 +508,13 @@ for making TUI-themed WASM webapps
 
 Demo: https://avid-rustacean.shuttleapp.rs/
 
-<!-- pause -->
+```bash +exec
+pkill trunk
+cd avid-rustacean/frontend
+trunk serve
+```
+
+<!-- end_slide -->
 
 ```bash +exec
 pkill trunk
@@ -590,6 +603,10 @@ _"Write Rust once, run everywhere."_
 
 <!-- end_slide -->
 
+![](assets/livestream.png)
+
+<!-- end_slide -->
+
 <!-- column_layout: [1, 1] -->
 
 <!-- column: 0 -->
@@ -619,6 +636,29 @@ _"WASM application bundler for Rust"_
 • Bundle WASM, JS snippets, images, css, scss etc.
 
 • Uses a source HTML file
+
+<!-- end_slide -->
+
+```html
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trunk</title>
+    <style>
+      body {
+        background-color: #121212;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import init from "./pkg/wasm.js";
+      init();
+    </script>
+  </body>
+</html>
+```
 
 <!-- end_slide -->
 
@@ -729,17 +769,11 @@ Build terminal-themed web applications with Rust and WebAssembly.
 
 `https://github.com/orhun/ratzilla`
 
-<!-- pause -->
-
-```bash +exec
-pkill trunk
-cd ratzilla/examples/demo
-trunk serve
-```
+Demo: https://orhun.dev/ratzilla/demo/
 
 <!-- reset_layout -->
 
-![](./assets/rat-omg.gif)
+![image:width:90%](./assets/rat-boom.gif)
 
 <!-- end_slide -->
 
@@ -756,6 +790,12 @@ A community for open-source terminal software enthusiasts.
 `https://github.com/terminalcollective`
 
 ![](./assets/rat-ski.gif)
+
+<!-- end_slide -->
+
+<!-- new_lines: 3 -->
+
+![image:width:80%](./assets/ratzilla-news.jpg)
 
 <!-- end_slide -->
 

@@ -1,7 +1,6 @@
 [submodule "ratatui"]
 	path = ratatui
 	url = https://github.com/ratatui/ratatui
-
 [submodule "tachyonfx"]
 	path = tachyonfx
 	url = https://github.com/junkdog/tachyonfx
@@ -14,3 +13,6 @@
 [submodule "ratzilla"]
 	path = ratzilla
 	url = https://github.com/orhun/ratzilla
+[submodule "avid-rustacean"]
+	path = avid-rustacean
+	url = https://github.com/TylerBloom/avid-rustacean
