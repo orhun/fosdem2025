@@ -761,19 +761,27 @@ fn main() -> std::io::Result<()> {
 
 <!-- end_slide -->
 
-# Ratzilla
+<!-- column_layout: [1, 1] -->
+
+<!-- column: 0 -->
+
+### Ratzilla
 
 <!-- pause -->
 
-Build terminal-themed web applications with Rust and WebAssembly.
+![](assets/ratzilla.gif)
 
-`https://github.com/orhun/ratzilla`
+<!-- column: 1 -->
 
-Demo: https://orhun.dev/ratzilla/demo/
+<!-- new_lines: 4 -->
+
+🦀 Build terminal-themed web applications with Rust and WebAssembly.
+
+🌊 GitHub:`https://github.com/orhun/ratzilla`
+
+✨ Demo: https://orhun.dev/ratzilla/demo/
 
 <!-- reset_layout -->
-
-![image:width:90%](./assets/rat-boom.gif)
 
 <!-- end_slide -->
 
